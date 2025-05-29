@@ -2,55 +2,72 @@
 
 <br>
 
-<img src="Pizza_Logo.png" width=250 heigth=250>
+<img src="swiggy_logo.png" width=250 heigth=250>
 
 <br>
 
- The project has been performed in MySQL Workbench to analyze PizzaHut's sales data, revealing insights into total orders, revenue, top pizzas by size and category and order distribution by time. It identifies leading pizza types and their revenue contributions, providing data-driven insights for inventory optimization and improved customer satisfaction.
+ The project has been performed in MySQL to analyze Swiggy's sales data, revealing insights into total orders, revenue, top selling item based on age group, location and driver performance and order distribution by time. MS Excel has been used to clean, filter and modify data as per needs. The data is presented in the form of Report or Dashboard in Power BI, which helps to keep an eye on KPIs, restaurant performances, customer analysis, etc. based on different filters.
 
 <br>
 
 ## Schema
-### 1. Order Details
+### 1. Customers
 
 | Column            | Description                                   | Data Type  |
 |-------------------|-----------------------------------------------|------------|
-| order_details_id  | Invoice of the orders made                    | INT        |
-| order_id          | Order details                                 | INT        |
-| pizza_id          | Pizza Details                                 | TEXT       |
-| quantity          | Amount of pizza ordered                       | INT        |
+| customer_id       | Unique Identifier for Customers               | INT        |
+| customer_name     | Name of the Customer                          | TEXT       |
+| age               | Age of Customer                               | INT        |
+| gender            | Gender of Customer                            | TEXT       |
+| registration_date | Date of Order Booking                         | DATETIME   |
 
 <br>
 
-### 2. Orders
+### 2. Deliveries
 
-| Column            | Description                                   | Data Type  |
-|-------------------|-----------------------------------------------|------------|
-| order_id          | Order Details                                 | INT        |
-| date              | Date on which order placed                    | DATE       |
-| time              | Time at which order placed                    | TIME       |
-
-<br>
-
-### 3. Pizza Types
-
-| Column            | Description                                   | Data Type  |
-|-------------------|-----------------------------------------------|------------|
-| pizza_type_id     | Pizza Type Details                            | INT        |
-| name              | Name of the Pizza Type                        | TEXT       |
-| category          | Category of the Pizza Type                    | TEXT       |
-| ingredients       | Ingredients Used in the Pizza Type            | TEXT       |
+| Column            | Description                                    | Data Type  |
+|-------------------|------------------------------------------------|------------|
+| delivery_id       | Unique Identifier of Delivery                  | INT        |
+| order_id          | Unique Identifier of Order                     | INT        |
+| delivery_status   | Status of Delivery (Delivered, Failed, Transit)| TEXT       |
+| delivery_time     | Time of Delivery                               | DATETIME   |
+| rider_id          | Unique Identifier of Rider                     | INT        |
 
 <br>
 
-### 4. Pizzas
+### 3. Orders
 
 | Column            | Description                                   | Data Type  |
 |-------------------|-----------------------------------------------|------------|
-| pizza_id          | Pizza Details                                 | INT        |
-| pizza_type_id     | Pizza Type Details                            | INT        |
-| size              | Size of Pizza (S,M,L,XL,XXL)                  | TEXT       |
-| price             | Price of Pizza                                | DOUBLE     |
+| order_id          | Unique Identifier of Orders                   | INT        |
+| customer_id       | Unique Identifier of Customer                 | INT        |
+| restaurant_id     | Unique Identifier of Restaurant               | INT        |
+| order_item        | Food Item Name                                | TEXT       |
+| order_time        | Time of Order                                 | DATETIME   |
+| order_status      | Status of Order                               | TEXT       |
+| total_amount      | Total Amount of the Order                     | FLOAT      |
+| order_rating      | Order Rating                                  | INT        |
+
+<br>
+
+### 4. Restaurants
+
+| Column            | Description                                   | Data Type  |
+|-------------------|-----------------------------------------------|------------|
+| restaurant_id     | Unique Identifier of Restaurant               | INT        |
+| restaurant_name   | Name of the Restaurant                        | TEXT       |
+| city              | Name of the City                              | TEXT       |
+| opening_hours     | Restaurant open timings                       | TEXT       |
+
+<br>
+
+### 5. Riders
+
+| Column            | Description                                   | Data Type  |
+|-------------------|-----------------------------------------------|------------|
+| rider_id          | Unique Identifier of Rider                    | INT        |
+| rider_name        | Name of the Rider                             | TEXT       |
+| sign_up           | Date of Sign up                               | DATETIME   |
 
 <br>
 
@@ -65,31 +82,8 @@
 ***2.	Feature Engineering***
 
 This will help use generate some new columns from existing ones.
-- Add a new column named Hours to give insight of sales in the different time intervals. This will help answer the question on which part of the day most sales are made.
-- Add a new column named Total_Revenue that contains the total revenue generated by each pizza type, based on time, month or dates. This will help answer the question which pizza type is most demanding on which time interval.
-
-<br>
-
-***3.  Exploratory Data Analysis (EDA)***
-
-- Conducting exploratory data analysis is essential to address the project's listed questions and objectives.
-<br>
-
-## Objectives for Analysis
-
-- Retrieve the total number of orders placed.
-- Calculate the total revenue generated from pizza sales.
-- Identify the highest-priced pizza.
-- Identify the most common pizza size ordered.
-- List the top 5 most ordered pizza types along with their quantities.
-- Join the necessary tables to find the total quantity of each pizza category ordered.
-- Determine the distribution of orders by hour of the day.
-- Join relevant tables to find the category-wise distribution of pizzas.
-- Group the orders by date and calculate the average number of pizzas ordered per day.
-- Determine the top 3 most ordered pizza types based on revenue.
-- Calculate the percentage contribution of each pizza type to total revenue.
-- Analyze the cumulative revenue generated over time.
-- Determine the top 3 most ordered pizza types based on revenue for each pizza category.
+- Add a new column named age_range in Customers to give insight of age distribution. This will help answer the question about item and restaurant mostly preferred by particular age group.
+- Add a new column named range that contains the time range when the order was delivered. This will help answer to analyze the pattern of when and which items are mostly ordered in different hours of day.
 
 <br>
 
@@ -98,24 +92,23 @@ This will help use generate some new columns from existing ones.
 <br>
 
 ## 1. Main Page
-<img src="Main_Page.png" width=850 heigth=850>
+<img src="HomePage.png" width=850 heigth=850>
 <br>
 
-## 2. Category Details Page 
-### 1. Category = Classic
-<img src="Category_Classic.png" width=850 heigth=850>
+## 2. Main Page for a specific restaurant in Pune 
+<img src="HomePage_Filter.png" width=850 heigth=850>
 <br>
 
-### 2. Category = Chicken
-<img src="Category_Chicken.png" width=850 heigth=850>
+## 3. Customer Analysis
+<img src="Customer_Analysis.png" width=850 heigth=850>
 <br>
 
-### 3. Category = Supreme
-<img src="Category_Supreme.png" width=850 heigth=850>
+### 4. Delivery Rider Performance
+<img src="Delivery_Rider_Performance.png" width=850 heigth=850>
 <br>
 
-### 4. Category = Veggie
-<img src="Category_Veggie.png" width=850 heigth=850>
+### 5. Restaurant Performance
+<img src="Restaurant_Performance.png" width=850 heigth=850>
 <br>
 
 ## Author
